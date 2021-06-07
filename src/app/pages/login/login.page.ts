@@ -31,16 +31,23 @@ export class LoginPage implements OnInit {
     const loading = await this.loadingController.create();
     loading.present();
 
-    this.authService.login(this.credentials.value).subscribe(async (resp) => {
-      await loading.dismiss();
-      console.log(resp, 'in login page');
-      const alert = await this.alertController.create({
-        header: 'login failed',
-        message: resp.error,
-        buttons: ['OK'],
-      });
-      await alert.present();
-    });
+    this.authService.login(this.credentials.value).subscribe(
+      async (resp) => {
+        await loading.dismiss();
+        this.router.navigateByUrl('/tabs', { replaceUrl: true });
+        console.log(resp, 'in login page');
+      },
+
+      async (resp) => {
+        await loading.dismiss();
+        const alert = await this.alertController.create({
+          header: 'login failed',
+          message: resp.error.error,
+          buttons: ['OK'],
+        });
+        await alert.present();
+      }
+    );
   }
 
   getEmail() {

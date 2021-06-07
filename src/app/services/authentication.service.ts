@@ -38,15 +38,8 @@ export class AuthenticationService {
         return from(Storage.set({ key: TOKEN_KEY, value: token }));
       }),
       //tap(this.isAuthenticated.next(true))
-      tap({
-        next: (x = 'XV') => {
-          console.log(x, 'in auth service');
-          this.isAuthenticated.next(true);
-        },
-        error: (err = 'ERR V') => {
-          console.log(err, 'in auth service');
-          this.isAuthenticated.next(false);
-        },
+      tap((x) => {
+        this.isAuthenticated.next(true);
       })
     );
   }

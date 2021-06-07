@@ -15,11 +15,15 @@
         ></ion-input>
       </ion-item>
       <div
-        *ngIf="(email.dirty || email.touched) && email.errors"
+        *ngIf="(credentials.get('email').dirty || credentials.get('email').touched) && credentials.get('email').errors"
         class="errors"
       >
-        <span *ngIf="email.errors?.required">Email is required</span>
-        <span *ngIf="email.errors?.email">Email is invalid</span>
+        <span *ngIf="credentials.get('email').errors?.required"
+          >Email is required</span
+        >
+        <span *ngIf="credentials.get('email').errors?.email"
+          >Email is invalid</span
+        >
       </div>
       <ion-item>
         <ion-input
@@ -29,11 +33,13 @@
         ></ion-input>
       </ion-item>
       <div
-        *ngIf="(password.dirty || password.touched) && password.errors"
+        *ngIf="(credentials.get('password').dirty || credentials.get('password').touched) && credentials.get('password').errors"
         class="errors"
       >
-        <span *ngIf="password.errors?.required">Password is required</span>
-        <span *ngIf="password.errors?.minlength"
+        <span *ngIf="credentials.get('password').errors?.required"
+          >Password is required</span
+        >
+        <span *ngIf="credentials.get('password').errors?.minlength"
           >Password needs to be 6 characters</span
         >
       </div>
